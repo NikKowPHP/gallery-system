@@ -59,7 +59,7 @@ class user
 		global $database;
 		$username = $database->escape_string($username);
 		$password = $database->escape_string($password);
-		$sql = "SELECT * FROM users WHERE 'username' = '{$username}' AND 'password' = '{$password}' LIMIT 1";
+		$sql = "SELECT * FROM users WHERE username = '$username' AND user_password = '$password' LIMIT 1";
 		$result_arr = self::find_this_query($sql);
 
 		return !empty($result_arr) ? array_shift($result_arr) : null;
