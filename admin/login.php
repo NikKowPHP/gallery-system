@@ -1,6 +1,7 @@
 <?php
-require_once("init.php");
+require_once("./includes/init.php");
 echo "<h1>This is the login page</h1>";
+$msg = "";
 
 if ($session->is_signed_in()) {
 	redirect("index.php");
@@ -12,9 +13,11 @@ if (isset($_POST['submit'])) {
 
 
 	$user_found = User::verify_user($username, $password);
+    var_dump($user_found);
 
 	if (!is_null($user_found)) {
 		$session->login($user_found);
+        var_dump($user_found);
 		redirect("index.php");
 	} else {
 		$msg = "Password or username are incorrect";
