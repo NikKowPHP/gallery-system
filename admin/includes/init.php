@@ -6,6 +6,3 @@ require_once("functions.php");
 require_once("session.php");
 
 
-define(INDEX_PATH, "/loginsys/");
-define(INDEX_INCLUDES, "/loginsys/includes/");
-define(ADMIN_INCLUDES, "/loginsys/admin/includes/");
