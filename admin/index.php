@@ -27,9 +27,8 @@
 
             <pre>
               <?php
-              $user = user::find_user_by_id(2);
+              $user = user::find_user_by_id($_SESSION['user_id']);
 							print_r($user);
-                            $picture = new Picture();
 
 
 

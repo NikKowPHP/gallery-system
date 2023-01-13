@@ -1,5 +1,5 @@
-<?php include("includes/header.php"); ?>
-<?php include("includes/top_nav.php"); ?>
+<?php require_once("includes/header.php"); ?>
+<?php require_once("includes/top_nav.php"); ?>
 
 
 
