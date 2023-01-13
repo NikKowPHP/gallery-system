@@ -27,6 +27,6 @@
 
 </form>
 
-    <h4 class="bg-danger"><?= $_SESSION['msg'] ?? "" ?></h4>
+    <h4 class="bg-danger"><?= $session->message ?? "" ?></h4>
 
 </div>

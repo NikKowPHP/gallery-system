@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
 		$session->login($user_found);
 		redirect("admin/index.php");
 	} else {
-		$_SESSION['msg'] = "password or username is not correct";
+		$session->message("Entered the wrong password or username");
 		redirect("login_page.php");
 	}
 } else {

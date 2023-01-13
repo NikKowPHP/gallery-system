@@ -4,11 +4,13 @@ class Session
 {
 	private bool $signed_in = false;
 	public int $user_id;
+	public string $message;
 
 	function __construct()
 	{
 		session_start();
 		$this->check_login();
+		$this->check_message();
 	}
 
 	public function is_signed_in(): bool
@@ -42,6 +44,26 @@ class Session
 		unset($_SESSION['user_id']);
 		unset($this->user_id);
 		$this->signed_in = false;
+	}
+
+	public function message($msg = "")
+	{
+		if (!empty($msg)) {
+			$_SESSION['message'] = $msg;
+
+		} else {
+			return $this->message;
+		}
+	}
+
+	private function check_message()
+	{
+		if (isset($_SESSION['message'])) {
+			$this->message = $_SESSION['message'];
+			unset($_SESSION['message']);
+		} else {
+			$this->message = "";
+		}
 	}
 
 
