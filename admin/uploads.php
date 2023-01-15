@@ -22,6 +22,33 @@
                 </ol>
             </div>
         </div>
+
+
+			<?php
+			echo "<pre>";
+			print_r($_FILES['file_upload']);
+			echo "</pre>";
+
+
+			$temp_name = $_FILES['file_upload']['tmp_name'];
+			$file = $_FILES['file_upload']['name'];
+			$directory = "admin/uploads";
+			$upload_errors = [
+				UPLOAD_ERR_OK => "THERE IS NO ERROR",
+			];
+			if (move_uploaded_file($temp_name, $directory . "/" . $file)) {
+				$message = "file uploaded successfully";
+
+			} else {
+				$error = $_FILES['file_upload']['error'];
+				$message = $upload_errors[$error];
+
+			}
+
+			if (!empty($message)) {
+				echo $message;
+			}
+			?>
         <!-- /.row -->
 
     </div>
