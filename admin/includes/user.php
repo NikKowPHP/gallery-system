@@ -66,16 +66,16 @@ class user
 
 	}
 
-	public function create()
+	public function create(): bool
 	{
 		global $database;
 		$sql = "
 		INSERT INTO users (username, user_password, user_firstname, user_lastname)
 		VALUES (
-		        '$database->escape_string($this->username)',
-		        '$database->escape_string($this->user_password)',
-		        '$database->escape_string($this->user_firstname)',
-		        '$database->escape_string($this->user_lastname)'
+		        '$this->username',
+		        '$this->user_password',
+		        '$this->user_firstname',
+		        '$this->user_lastname'
 		) 
 					";
 		if ($database->query($sql)) {
@@ -84,6 +84,15 @@ class user
 		} else {
 			return false;
 		}
+	}
+
+	public function update(): bool
+	{
+		global $database;
+		$sql = "
+		UPDATE users SET username ='$this->username', user_password = '$this->user_password', user_firstname = '$this->user_firstname', user_lastname = '$this->user_lastname' WHERE id = $this->id";
+		$database->query($sql);
+		return $database->connection->affected_rows === 1;
 	}
 
 
