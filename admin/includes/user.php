@@ -95,5 +95,13 @@ class user
 		return $database->connection->affected_rows === 1;
 	}
 
+	public function delete(): bool
+	{
+		global $database;
+		$sql = "
+		DELETE FROM users WHERE id = $this->id LIMIT 1";
+		return (bool)$database->query($sql);
+	}
+
 
 }
