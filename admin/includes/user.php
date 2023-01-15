@@ -66,6 +66,25 @@ class user
 
 	}
 
+	public function create()
+	{
+		global $database;
+		$sql = "
+		INSERT INTO users (username, user_password, user_firstname, user_lastname)
+		VALUES (
+		        '$database->escape_string($this->username)',
+		        '$database->escape_string($this->user_password)',
+		        '$database->escape_string($this->user_firstname)',
+		        '$database->escape_string($this->user_lastname)'
+		) 
+					";
+		if ($database->query($sql)) {
+			$this->id = $database->the_insert_id();
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 
 }
-
