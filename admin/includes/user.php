@@ -2,6 +2,7 @@
 
 class user
 {
+	protected static $db_table = "users";
 	public $id;
 	public $username;
 	public $user_password;
@@ -76,7 +77,7 @@ class user
 	{
 		global $database;
 		$sql = "
-		INSERT INTO users (username, user_password, user_firstname, user_lastname)
+		INSERT INTO " . self::$db_table . " (username, user_password, user_firstname, user_lastname)
 		VALUES (
 		        '$this->username',
 		        '$this->user_password',
@@ -105,7 +106,7 @@ class user
 	{
 		global $database;
 		$sql = "
-		DELETE FROM users WHERE id = $this->id LIMIT 1";
+		DELETE FROM " . self::$db_table . " WHERE id = $this->id LIMIT 1";
 		return (bool)$database->query($sql);
 	}
 
