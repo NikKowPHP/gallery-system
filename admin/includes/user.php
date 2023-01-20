@@ -4,7 +4,7 @@ class user
 {
 	protected static string $db_table = "users";
 	protected array $db_table_fields = ['username', 'user_password', 'user_firstname', 'user_lastname'];
-	public int $id;
+	public ?int $id = null;
 	public string $username;
 	public string $user_password;
 	public string $user_firstname;
@@ -98,13 +98,26 @@ class user
 		}
 	}
 
-	public function update(): bool
+	public function update()
 	{
 		global $database;
+
+		$props = $this->get_properties();
+		$props_pairs = [];
+
+		foreach ($props as $key => $value) {
+
+			$props_pairs[] = "$key='$value'";
+
+		}
+
+
 		$sql = "
-		UPDATE users SET username ='$this->username', user_password = '$this->user_password', user_firstname = '$this->user_firstname', user_lastname = '$this->user_lastname' WHERE id = $this->id";
-		$database->query($sql);
-		return $database->connection->affected_rows === 1;
+		UPDATE users SET " . implode(", ", $props_pairs) ." WHERE id = $this->id";
+
+//		$database->query($sql);
+//		return $database->connection->affected_rows === 1;
+
 	}
 
 	public function delete(): bool
