@@ -27,12 +27,19 @@
 
             <pre>
               <?php
-              $user = user::find_user_by_id($_SESSION['user_id']);
-							print_r($user);
+							$user = User::find_user_by_id(7);
+							$user->username = "kent";
+							$user->user_password= "amigo";
+							$user->user_firstname= "dager";
+							$user->user_lastname= "latina";
+                           print_r($user->update());
 
 
 
-              ?>
+
+
+
+							?>
 
           </pre>
         </div>
