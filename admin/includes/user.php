@@ -106,17 +106,12 @@ class user
 		$props_pairs = [];
 
 		foreach ($props as $key => $value) {
-
 			$props_pairs[] = "$key='$value'";
-
 		}
-
-
 		$sql = "
 		UPDATE users SET " . implode(", ", $props_pairs) ." WHERE id = $this->id";
-
-//		$database->query($sql);
-//		return $database->connection->affected_rows === 1;
+		$database->query($sql);
+		return $database->connection->affected_rows === 1;
 
 	}
 
