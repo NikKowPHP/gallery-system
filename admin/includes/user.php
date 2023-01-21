@@ -5,73 +5,57 @@ class user
 	protected static string $db_table = "users";
 	protected array $db_table_fields = ['username', 'user_password', 'user_firstname', 'user_lastname'];
 	public ?int $id = null;
-	public string $username;
-	public string $user_password;
-	public string $user_firstname;
-	public string $user_lastname;
+	public ?string $username = null;
+	public ?string $user_password = null;
+	public ?string $user_firstname = null;
+	public ?string $user_lastname = null;
 
-	public static function instantiation(array $the_record): user
+	private static function instantiate($db_row):?self
 	{
-		$the_object = new self();
-		foreach ($the_record as $key => $value) {
-			if ($the_object->has_the_attribute($key)) {
-				$the_object->$key = $value;
+		$obj = new self();
+		foreach ($db_row as $key => $value) {
+			if (property_exists($obj, $key)) {
+				$obj->$key = $value;
 			}
 		}
-		return $the_object;
+		return $obj;
 	}
 
-	private function has_the_attribute($the_attribute): bool
-	{
-		$obj_props = get_object_vars($this);
-		return array_key_exists($the_attribute, $obj_props);
-	}
 
-	protected function get_properties(): array
+	protected function properties(): array
 	{
+		global $database;
 		$props = [];
 		foreach ($this->db_table_fields as $field) {
 			if (property_exists($this, $field)) {
-				$props[$field] = $this->$field;
+				$props[$field] = $database->escape_string($this->$field);
 			}
 		}
 		return $props;
 	}
 
-	protected function clean_properties()
+	protected static function get_data_by_query($sql):array
 	{
 		global $database;
-
-		$clean_props = [];
-		foreach ($this->get_properties() as $key => $value) {
-			$clean_props[$key] = $database->escape_string($value);
+		$objects_arr = [];
+		$rows = $database->query($sql);
+		while($row = $rows->fetch_assoc() ) {
+			$objects_arr[] = self::instantiate($row);
 		}
-		return $clean_props;
+		return $objects_arr;
 
 	}
 
-	public static function find_this_query(string $sql): array
+	public static function get_all(): array
 	{
-		global $database;
-		$obj_arr = [];
-
-		$result_set = $database->query($sql);
-		while ($row = $result_set->fetch_array()) {
-			$obj_arr[] = self::instantiation($row);
-		}
-		return $obj_arr;
-	}
-
-
-	public static function find_all_users(): array
-	{
-		return self::find_this_query("SELECT * FROM users");
+		return self::get_data_by_query("SELECT * FROM " . self::$db_table);
 
 	}
 
-	public static function find_user_by_id(int $id): ?user
+	public static function get_by_id(int $id): ?self
 	{
-		$result_arr = self::find_this_query("SELECT * FROM users WHERE id = $id LIMIT 1");
+		$sql = "SELECT * FROM " . self::$db_table . " WHERE id = $id";
+		$result_arr = self::get_data_by_query($sql);
 		return !empty($result_arr) ? array_shift($result_arr) : null;
 
 
@@ -84,7 +68,7 @@ class user
 		$username = $database->escape_string($username);
 		$password = $database->escape_string($password);
 		$sql = "SELECT * FROM users WHERE username = '$username' AND user_password = '$password' LIMIT 1";
-		$result_arr = self::find_this_query($sql);
+		$result_arr = self::get_data_by_query($sql);
 
 		return !empty($result_arr) ? array_shift($result_arr) : null;
 
@@ -99,7 +83,7 @@ class user
 	public function create(): bool
 	{
 		global $database;
-		$props = $this->clean_properties();
+		$props = $this->properties();
 		$sql = "INSERT INTO " . self::$db_table . "(" . implode(",", array_keys($props)) . ") 
 		VALUES (' " . implode("','", array_values($props)) . " ') ";
 		if ($database->query($sql)) {
@@ -114,7 +98,7 @@ class user
 	{
 		global $database;
 
-		$props = $this->clean_properties();
+		$props = $this->properties();
 		$props_pairs = [];
 
 		foreach ($props as $key => $value) {
