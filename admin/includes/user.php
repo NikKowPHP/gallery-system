@@ -38,6 +38,18 @@ class user
 		return $props;
 	}
 
+	protected function clean_properties()
+	{
+		global $database;
+
+		$clean_props = [];
+		foreach ($this->get_properties() as $key => $value) {
+			$clean_props[$key] = $database->escape_string($value);
+		}
+		return $clean_props;
+
+	}
+
 	public static function find_this_query(string $sql): array
 	{
 		global $database;
@@ -87,7 +99,7 @@ class user
 	public function create(): bool
 	{
 		global $database;
-		$props = $this->get_properties();
+		$props = $this->clean_properties();
 		$sql = "INSERT INTO " . self::$db_table . "(" . implode(",", array_keys($props)) . ") 
 		VALUES (' " . implode("','", array_values($props)) . " ') ";
 		if ($database->query($sql)) {
@@ -98,11 +110,11 @@ class user
 		}
 	}
 
-	public function update()
+	public function update(): bool
 	{
 		global $database;
 
-		$props = $this->get_properties();
+		$props = $this->clean_properties();
 		$props_pairs = [];
 
 		foreach ($props as $key => $value) {
