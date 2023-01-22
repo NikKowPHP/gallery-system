@@ -19,7 +19,7 @@ class Photo extends Db_object
 
 	public function get_file_path()
 	{
-		return ADMIN_ROOT. DS . "images" . DS . $this->filename;
+		return ADMIN_ROOT. DS . $this->upload_dir . DS . $this->filename;
 	}
 	public function set_file($file)
 	{
