@@ -27,12 +27,9 @@
 
             <pre>
               <?php
-							$user = User::find_user_by_id(7);
-							$user->username = "kent";
-							$user->user_password= "amigo";
-							$user->user_firstname= "dager";
-							$user->user_lastname= "latina";
-                           print_r($user->update());
+							print_r(Photo::get_all());
+
+//							$user = User::find_this_query("SELECT * FROM users WHERE id = 7");
 
 
 

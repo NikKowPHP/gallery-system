@@ -2,7 +2,6 @@
 <?php require_once("includes/top_nav.php"); ?>
 
 
-
     <div class="container-fluid">
 
         <!-- Page Heading -->
@@ -22,40 +21,37 @@
                 </ol>
             </div>
         </div>
-
-
 			<?php
-			echo "<pre>";
-			print_r($_FILES['file_upload']);
-			echo "</pre>";
+			if (isset($_POST['submit'])) {
+				$photo = new Photo();
+				$photo->title = $_POST['title'];
+				$photo->set_file($_FILES['file_upload']);
 
-
-			$temp_name = $_FILES['file_upload']['tmp_name'];
-			$file = $_FILES['file_upload']['name'];
-			$directory = "admin/uploads";
-			$upload_errors = [
-				UPLOAD_ERR_OK => "THERE IS NO ERROR",
-			];
-			if (move_uploaded_file($temp_name, $directory . "/" . $file)) {
-				$message = "file uploaded successfully";
-
-			} else {
-				$error = $_FILES['file_upload']['error'];
-				$message = $upload_errors[$error];
-
+				if ($photo->save()) {
+					$message = "Photo uploaded successfully";
+				}
 			}
 
-			if (!empty($message)) {
-				echo $message;
-			}
 			?>
+
+        <form action="uploads.php" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="text" name="title" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="file" name="file_upload" class="form-control">
+            </div>
+            <input type="submit" name="submit">
+        </form>
+
+
         <!-- /.row -->
 
     </div>
     <!-- /.container-fluid -->
-    <?php include_once("includes/sidebar_nav.php"); ?>
+<?php include_once("includes/sidebar_nav.php"); ?>
 
-</div>
-<!-- /#page-wrapper -->
+    </div>
+    <!-- /#page-wrapper -->
 
 <?php include("includes/footer.php"); ?>
