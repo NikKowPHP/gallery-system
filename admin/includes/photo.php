@@ -17,6 +17,10 @@ class Photo extends Db_object
 	public array $upload_errors_arr = [];
 	public array $custom_errors = [];
 
+	public function get_file_path()
+	{
+		return ADMIN_ROOT. DS . "images" . DS . $this->filename;
+	}
 	public function set_file($file)
 	{
 		if(empty($file) || !$file || !is_array($file)) {
