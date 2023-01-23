@@ -1,7 +1,6 @@
 <?php include("includes/header.php"); ?>
 <?php include("includes/top_nav.php"); ?>
 
-
     <div class="container-fluid">
 
     <!-- Page Heading -->

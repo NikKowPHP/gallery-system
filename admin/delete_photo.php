@@ -4,7 +4,7 @@
 <?php
 	empty($_GET['id']) ?? redirect('admin/photos.php');
 	if ($photo = Photo::get_by_id($_GET['id'])) {
-		$photo->delete();
+		$photo->delete_photo();
 }
 	redirect("admin/photos.php");
 ?>
