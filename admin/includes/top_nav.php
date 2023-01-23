@@ -14,7 +14,7 @@
     <ul class="nav navbar-right top-nav">
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b
-                    class="caret"></b></a>
+                        class="caret"></b></a>
             <ul class="dropdown-menu message-dropdown">
                 <li class="message-preview">
                     <a href="#">
@@ -71,7 +71,7 @@
         </li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b
-                    class="caret"></b></a>
+                        class="caret"></b></a>
             <ul class="dropdown-menu alert-dropdown">
                 <li>
                     <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
@@ -99,7 +99,7 @@
         </li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b
-                    class="caret"></b></a>
+                        class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li>
                     <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -121,4 +121,3 @@
 
     <!-- /.navbar-collapse -->
 </nav>
-<div id="page-wrapper">
