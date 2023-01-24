@@ -6,6 +6,7 @@ class Photo extends Db_object
 	protected static array $db_table_fields = ['title', 'description', 'filename', 'filesize', 'size'];
 	public ?int $id = null;
 	public ?string $title = null;
+	public ?string $alt = null;
 	public ?string $description = null;
 	public ?string $filename = null;
 	public ?string $filetype = null;
