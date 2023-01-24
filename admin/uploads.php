@@ -1,6 +1,18 @@
 <?php require_once("includes/header.php"); ?>
 <?php require_once("includes/top_nav.php"); ?>
 
+<?php
+if (isset($_POST['submit'])) {
+	$photo = new Photo();
+	$photo->title = $_POST['title'];
+	$photo->set_file($_FILES['file_upload']);
+
+	if ($photo->save()) {
+		$message = "Photo uploaded successfully";
+	}
+}
+
+?>
 
     <div class="container-fluid">
 
@@ -21,18 +33,7 @@
                 </ol>
             </div>
         </div>
-			<?php
-			if (isset($_POST['submit'])) {
-				$photo = new Photo();
-				$photo->title = $_POST['title'];
-				$photo->set_file($_FILES['file_upload']);
 
-				if ($photo->save()) {
-					$message = "Photo uploaded successfully";
-				}
-			}
-
-			?>
 
         <form action="uploads.php" method="post" enctype="multipart/form-data">
             <div class="form-group">

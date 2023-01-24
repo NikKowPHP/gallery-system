@@ -49,7 +49,7 @@ foreach ($photos as $photo):
     <td><?= $photo->filename?></td>
     <td><?= $photo->filetype?></td>
     <td><?= $photo->size ?></td>
-    <td><a class="btn btn-primary" href="edit_photo.php/?id=<?= $photo->id ?>">edit</a></td>
+    <td><a class="btn btn-primary" href="edit_photo_page.php/?id=<?= $photo->id ?>">edit</a></td>
     <td><a class="btn btn-danger" href="delete_photo.php/?id=<?= $photo->id ?>">delete</a></td>
     </tr>
 <?php endforeach; ?>
