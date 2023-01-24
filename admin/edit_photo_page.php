@@ -51,9 +51,10 @@ if (isset($_GET['id'])) $photo = Photo::get_by_id($_GET['id']);
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <img width="500" src="<?= $photo->get_file_path() ?>" alt="">
-
-
+                    <img width="500" src="<?= $photo->get_file_path() ?>" alt="<?= $photo->alt ?>">
+                </div>
+                <div class="form-group">
+                    <input type="file" name="new_file" class="form-control">
                 </div>
             </div>
         </form>
