@@ -18,12 +18,12 @@ class Photo extends Db_object
 	public array $upload_errors_arr = [];
 	public array $custom_errors = [];
 
-	private function unlink_path()
+	public function unlink_path():string
 	{
 		return ADMIN_ROOT . DS . $this->upload_dir . DS . $this->filename;
 	}
 
-	public function get_file_path()
+	public function get_file_path():string
 	{
 		return ADMIN_UPLOADS_PATH . DS . $this->upload_dir . DS . $this->filename;
 	}
@@ -73,6 +73,21 @@ class Photo extends Db_object
 			}
 
 		}
+	}
+
+	public function update_file()
+	{
+		$target_path = ADMIN_ROOT . DS . $this->upload_dir . DS . $this->filename;
+		if (file_exists($target_path)) {
+			$this->custom_errors[] = "the file $this->filename already exists";
+		}
+		if (move_uploaded_file($this->tmp_path, $target_path)) {
+				unset($this->tmp_path);
+				return true;
+		} else {
+			$this->custom_errors[] = "the file directory does not have permission";
+		}
+
 	}
 
 	public function delete_photo(): bool
