@@ -27,10 +27,7 @@ if (isset($_GET['id'])) {
             </div>
         </div>
         <!-- /.row -->
-        <form action="/loginsys/admin/includes/edit_photo.php" method="post" enctype="multipart/form-data">
-            <div class="d-none">
-                <input type="text" class="d-none" name="id" value="<?= $photo->id ?>">
-            </div>
+        <form action="/loginsys/admin/includes/edit_photo.php?id=<?=$photo->id ?>" method="post" enctype="multipart/form-data">
             <div class="col-md-6">
                 <div class="form-group">
                     <label> Title

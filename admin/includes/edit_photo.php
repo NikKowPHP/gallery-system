@@ -6,7 +6,7 @@
 
 // DELETE THE OLD ONE AND UPDATE NEW ONE
 if (isset($_POST['submit'])) {
-	if ($photo = Photo::get_by_id($_POST['id'])) {
+	if ($photo = Photo::get_by_id($_GET['id'])) {
 		$edited_photo = $photo->iterate_post($_POST);
 
 		if ($_FILES['new_photo_upload']['size'] !== 0) {
