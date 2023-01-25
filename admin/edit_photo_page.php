@@ -2,12 +2,10 @@
 <?php include("includes/top_nav.php"); ?>
 
 <?php
-if (isset($_GET['id'])) $photo = Photo::get_by_id($_GET['id']);
+if (isset($_GET['id'])) {
+    $photo = Photo::get_by_id($_GET['id']);
+}
 ?>
-
-    }
-    ?>
-
 
     <div class="container-fluid">
 
@@ -29,7 +27,10 @@ if (isset($_GET['id'])) $photo = Photo::get_by_id($_GET['id']);
             </div>
         </div>
         <!-- /.row -->
-        <form action="edit_photo.php" method="post" enctype="multipart/form-data">
+        <form action="/loginsys/admin/includes/edit_photo.php" method="post" enctype="multipart/form-data">
+            <div class="d-none">
+                <input type="text" class="d-none" name="id" value="<?= $photo->id ?>">
+            </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label> Title
@@ -54,7 +55,7 @@ if (isset($_GET['id'])) $photo = Photo::get_by_id($_GET['id']);
                     <img width="500" src="<?= $photo->get_file_path() ?>" alt="<?= $photo->alt ?>">
                 </div>
                 <div class="form-group">
-                    <input type="file" name="new_file" class="form-control">
+                    <input type="file" name="new_photo_upload" class="form-control">
                 </div>
             </div>
         </form>
