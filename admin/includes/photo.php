@@ -3,7 +3,7 @@
 class Photo extends Db_object
 {
 	protected static string $db_table = "photos";
-	protected static array $db_table_fields = ['title', 'description', 'filename', 'filesize', 'size'];
+	protected static array $db_table_fields = ['title','alt', 'description', 'filename', 'filetype', 'size'];
 	public ?int $id = null;
 	public ?string $title = null;
 	public ?string $alt = null;
@@ -75,7 +75,7 @@ class Photo extends Db_object
 		}
 	}
 
-	public function update_file()
+	public function update_file():bool
 	{
 		$target_path = ADMIN_ROOT . DS . $this->upload_dir . DS . $this->filename;
 		if (file_exists($target_path)) {

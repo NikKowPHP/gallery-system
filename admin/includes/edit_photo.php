@@ -3,6 +3,7 @@
 
 
 <?php
+if(empty($_GET['id'])) redirect("admin/photos.php");
 
 // DELETE THE OLD ONE AND UPDATE NEW ONE
 if (isset($_POST['submit'])) {

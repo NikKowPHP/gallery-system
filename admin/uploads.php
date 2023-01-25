@@ -13,6 +13,8 @@ if (isset($_POST['submit'])) {
 }
 
 ?>
+<div id="page-wrapper">
+
 
     <div class="container-fluid">
 

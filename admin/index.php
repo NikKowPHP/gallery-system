@@ -29,12 +29,6 @@
               <?php
 							print_r(Photo::get_all());
 
-//							$user = User::find_this_query("SELECT * FROM users WHERE id = 7");
-
-
-
-
-
 
 							?>
 

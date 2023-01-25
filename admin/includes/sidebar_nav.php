@@ -10,7 +10,7 @@
             <a href="uploads.php"><i class="fa fa-fw fa-dashboard"></i>Upload</a>
         </li>
         <li>
-            <a href="photos.php"><i class="fa fa-fw fa-bar-chart-o"></i></a>
+            <a href="photos.php"><i class="fa fa-fw fa-bar-chart-o"></i>Photos</a>
         </li>
         <li>
             <a href="comments.php"><i class="fa fa-fw fa-table"></i>Comments</a>

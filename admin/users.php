@@ -2,6 +2,8 @@
 <?php include("includes/top_nav.php"); ?>
 
 
+<div id="page-wrapper">
+
 
     <div class="container-fluid">
 
