@@ -9,6 +9,7 @@ defined('ADMIN_UPLOADS_PATH') ? null : define('ADMIN_UPLOADS_PATH', DS .'loginsy
 require_once("new_config.php");
 require_once("database.php");
 require_once("db_object.php");
+require_once("File.php");
 require_once("User.php");
 require_once("photo.php");
 require_once("functions.php");
