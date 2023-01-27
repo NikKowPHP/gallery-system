@@ -53,7 +53,7 @@ if (isset($_GET['id'])) {
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <img width="500" src="<?= $user->get_avatar_path() ?>" alt="user avatar">
+                    <img width="500" src="<?= $user->avatar_placeholder_path() ?>" alt="user avatar">
                 </div>
                 <div class="form-group">
                     <input type="file" name="new_photo_upload" class="form-control">
