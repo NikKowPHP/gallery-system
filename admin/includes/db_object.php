@@ -106,9 +106,6 @@ class Db_object
 				$this->$key = $value;
 			}
 		}
-		echo "<pre>";
-		print_r($this);
-		echo "</pre>";
 		return $this;
 	}
 
