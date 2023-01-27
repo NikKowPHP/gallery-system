@@ -2,7 +2,7 @@
 <?php if (!$session->is_signed_in()) redirect("login_page.php"); ?>
 
 <?php
-if(empty($_GET['id'])) redirect("admin/users.php");
+if (empty($_GET['id'])) redirect("admin/users.php");
 
 if (isset($_POST['submit'])) {
 	if ($user = User::get_by_id($_GET['id'])) {
@@ -15,9 +15,8 @@ if (isset($_POST['submit'])) {
 //			$edited_user->set_file($_FILES['new_photo_upload']);
 //			$edited_user->update_file();
 //		}
-		if ($edited_user->save()) {
-			redirect("admin/edit_user_page.php/?id=$edited_user->id");
-		}
+		$edited_user->save();
+		redirect("admin/edit_user_page.php/?id=$edited_user->id");
 	}
 
 
