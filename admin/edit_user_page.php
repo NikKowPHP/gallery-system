@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                   Users
+                    Users
                     <small>Subheading</small>
                 </h1>
                 <ol class="breadcrumb">
@@ -32,7 +32,8 @@ if (isset($_GET['id'])) {
 
 
         <!-- /.row -->
-        <form action="/loginsys/admin/includes/edit_user.php/?id=<?= $user->id ?>" method="POST" enctype="multipart/form-data">
+        <form action="/loginsys/admin/includes/edit_user.php/?id=<?= $user->id ?>" method="POST"
+              enctype="multipart/form-data">
             <div class="col-md-6">
 
                 <div class="form-group">
@@ -47,7 +48,7 @@ if (isset($_GET['id'])) {
                 </div>
                 <div class="form-group">
                     <label>lastname
-                        <input type="text" name="lastname" class="form-control" value="<?= $user->lastname?>">
+                        <input type="text" name="lastname" class="form-control" value="<?= $user->lastname ?>">
                     </label>
                 </div>
             </div>
@@ -56,7 +57,7 @@ if (isset($_GET['id'])) {
                     <img width="500" src="<?= $user->avatar_placeholder_path() ?>" alt="user avatar">
                 </div>
                 <div class="form-group">
-                    <input type="file" name="new_photo_upload" class="form-control">
+                    <input type="file" name="new_avatar_file" class="form-control">
                 </div>
                 <input class="btn btn-primary" type="submit" name="submit" value="Edit">
             </div>
