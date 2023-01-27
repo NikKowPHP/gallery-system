@@ -22,6 +22,11 @@
                             <i class="fa fa-file"></i> Users
                         </li>
                     </ol>
+                    <?php if(isset($session->message)) {
+                        echo "<h4>$session->message</h4>";
+                    } ?>
+
+                    <a href="/loginsys/admin/add_user_page.php" class="btn btn-info"> create user</a>
                 </div>
             </div>
             <!-- /.row -->

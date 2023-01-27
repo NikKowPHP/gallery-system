@@ -1,13 +1,6 @@
 <?php include("includes/header.php"); ?>
 <?php include("includes/top_nav.php"); ?>
 
-<?php
-if (isset($_GET['id'])) {
-	$user = User::get_by_id($_GET['id']);
-} else {
-	redirect("admin/users.php");
-}
-?>
     <div id="page-wrapper">
 
     <div class="container-fluid">
@@ -32,37 +25,34 @@ if (isset($_GET['id'])) {
 
 
         <!-- /.row -->
-        <form action="add_user.php" method="POST" enctype="multipart/form-data">
+        <form action="/loginsys/admin/includes/add_user.php" method="POST" enctype="multipart/form-data">
             <div class="col-md-6">
                 <div class="form-group">
                     <label> username
-                        <input type="text" name="username" class="form-control" value="<?= $user->username ?>">
+                        <input type="text" name="username" class="form-control" >
                     </label>
                 </div>
                 <div class="form-group">
                     <label> password
-                        <input type="text" name="password" class="form-control" value="<?= $user->username ?>">
+                        <input type="text" name="password" class="form-control" >
                     </label>
                 </div>
                 <div class="form-group">
                     <label> firstname
-                        <input type="text" name="firstname" class="form-control" value="<?= $user->firstname ?>">
+                        <input type="text" name="firstname" class="form-control">
                     </label>
                 </div>
                 <div class="form-group">
                     <label>lastname
-                        <input type="text" name="lastname" class="form-control" value="<?= $user->lastname?>">
+                        <input type="text" name="lastname" class="form-control" >
                     </label>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <img width="500" src="<?= $user->avatar_placeholder_path() ?>" alt="user avatar">
+                    <input type="file" name="avatar_file" class="form-control">
                 </div>
-                <div class="form-group">
-                    <input type="file" name="new_photo_upload" class="form-control">
-                </div>
-                <input class="btn btn-primary" type="submit" name="submit" value="Edit">
+                <input class="btn btn-primary" type="submit" name="submit" value="Create">
             </div>
         </form>
         <!-- /.container-fluid -->
