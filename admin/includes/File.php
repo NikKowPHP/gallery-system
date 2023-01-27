@@ -79,9 +79,9 @@ class File extends Db_object
 		}
 	}
 
-	public function delete(): bool
+	public static function delete_file(string $upload_dir, string $filename): bool
 	{
-		return unlink(ADMIN_ROOT . DS . $this->upload_dir . DS . $this->name) ?? true;
+		return unlink(ADMIN_ROOT . DS . $upload_dir . DS . $filename) ?? true;
 	}
 
 }

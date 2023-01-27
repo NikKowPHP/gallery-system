@@ -7,16 +7,21 @@ if (empty($_GET['id'])) redirect("admin/users.php");
 if (isset($_POST['submit'])) {
 	if ($user = User::get_by_id($_GET['id'])) {
 		$edited_user = $user->iterate_post($_POST);
-// TODO: AVATAR UPLOAD AND DELETE
-//		if ($_FILES['new_photo_upload']['size'] !== 0) {
-//			if (file_exists($user->unlink_path())) {
-//				unlink($user->unlink_path());
-//			}
-//			$edited_user->set_file($_FILES['new_photo_upload']);
-//			$edited_user->update_file();
-//		}
-		$edited_user->save();
-		redirect("admin/edit_user_page.php/?id=$edited_user->id");
+		if ($_FILES['new_avatar_file']['error'] === 0) {
+
+			if(!empty($user->avatar)) {
+				File::delete_file($user->upload_dir, $user->avatar);
+			}
+
+			$edited_user->avatar = $_FILES['new_avatar_file']['name'];
+			$file = new File($edited_user->upload_dir);
+			$file->init($_FILES['new_avatar_file']);
+			$file->upload();
+		}
+		if($edited_user->save()) {
+			$session->message = "The user $edited_user->username has successfully edited";
+			redirect("admin/edit_user_page.php/?id=$edited_user->id");
+		}
 	}
 
 
