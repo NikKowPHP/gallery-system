@@ -2,7 +2,18 @@
 <?php if (!$session->is_signed_in()) redirect("login_page.php"); ?>
 
 <?php
-if (empty($_GET['id'])) redirect("admin/users.php");
+$user = '';
+if (empty($_GET['id'])) {
+	redirect("admin/users.php");
+} else {
+	$user = User::get_by_id($_GET['id']);
+}
+if(isset($_POST['delete'])) {
+	File::delete_file($user->upload_dir, $user->avatar);
+	$user->delete();
+	$session->message("User id - '$user->id' successfully deleted ");
+	redirect("admin/users.php");
+}
 
 if (isset($_POST['submit'])) {
 	if ($user = User::get_by_id($_GET['id'])) {

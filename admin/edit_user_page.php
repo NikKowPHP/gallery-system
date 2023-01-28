@@ -51,6 +51,11 @@ if (isset($_GET['id'])) {
                         <input type="text" name="lastname" class="form-control" value="<?= $user->lastname ?>">
                     </label>
                 </div>
+                <div class="form-group">
+                    <label>password
+                        <input type="password" name="password" class="form-control" value="<?= $user->password ?>">
+                    </label>
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
@@ -60,6 +65,7 @@ if (isset($_GET['id'])) {
                     <input type="file" name="new_avatar_file" class="form-control">
                 </div>
                 <input class="btn btn-primary" type="submit" name="submit" value="Edit">
+                <input class="btn btn-danger" type="submit" name="delete" value="Delete">
             </div>
         </form>
         <!-- /.container-fluid -->
