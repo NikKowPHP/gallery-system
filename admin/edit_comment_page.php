@@ -25,6 +25,9 @@ if (isset($_GET['id'])) {
                     <li>
                         <i class="fa fa-dashboard"></i> <a href="/loginsys/admin/">Dashboard</a>
                     </li>
+                    <li>
+                        <i class="fa fa-desktop"></i> <a href="/loginsys/admin/comments.php">Comments</a>
+                    </li>
                     <li class="active">
                         <i class="fa fa-file"></i> edit comment
                     </li>
@@ -69,17 +72,20 @@ if (isset($_GET['id'])) {
                 </div>
                 <div class="form-group">
                     <label> body
-                        <textarea name="body" id="comment_body" cols="30" rows="10"></textarea>
+                        <textarea name="body" id="comment_body" cols="30" rows="10"><?= $comment->body ?> </textarea>
                     </label>
                 </div>
                 <div class="form-group">
                     <label> Date
-                        <input type="date" name="date" class="form-control">
+                        <input type="date" name="date" class="form-control" value="<?= $comment->date ?>"/>
                     </label>
                 </div>
             </div>
             <div class="form-group">
                 <input class="btn btn-primary" type="submit" name="submit" value="Create">
+            </div>
+            <div class="form-group">
+                <input class="btn btn-danger" type="submit" name="delete" value="Delete">
             </div>
         </form>
         <!-- /.container-fluid -->
