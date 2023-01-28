@@ -8,6 +8,7 @@ if (isset($_POST['submit'])) {
 
 	$comment = $comment->iterate_post($_POST);
 
+
 	if($comment->save()) {
 		$session->message = "The comment to photo id '$comment->photo_id' successfully created";
 		redirect("admin/comments.php");
