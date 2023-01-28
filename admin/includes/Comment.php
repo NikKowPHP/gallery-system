@@ -11,6 +11,11 @@ class Comment extends Db_object
 	public ?string $date = null;
 
 
+	public static function get_all_by(string $by, int $id)
+	{
+		$sql = "SELECT * FROM comments WHERE $by = $id";
+		return self::get_data_by_query($sql);
+	}
 
 
 }
