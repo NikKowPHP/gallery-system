@@ -27,7 +27,7 @@
 								echo "<h4>$session->message</h4>";
 							} ?>
 
-                <a href="/loginsys/admin/add_user_page.php" class="btn btn-info"> create user</a>
+                <a href="/loginsys/admin/add_comment_page.php" class="btn btn-info"> create comment</a>
             </div>
         </div>
         <!-- /.row -->
@@ -36,31 +36,28 @@
                 <thead>
                 <tr>
                     <th>id</th>
-                    <th>username</th>
-                    <th>password</th>
-                    <th>firstname</th>
-                    <th>lastname</th>
-                    <th>placeholder</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>photo_id</th>
+                    <th>user_id</th>
+                    <th>body</th>
+                    <th>date</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
 									<?php
-									$users = User::get_all();
-									foreach ($users
+									$comments = Comment::get_all();
+                                    
+									foreach ($comments
 
-									as $user):
+									as $comment):
 									?>
-                    <td><?= $user->id ?></td>
-                    <td><?= $user->username ?></td>
-                    <td><?= $user->password ?></td>
-                    <td><?= $user->firstname ?></td>
-                    <td><?= $user->lastname ?></td>
-                    <td><img width="100" src="<?= $user->avatar_placeholder_path() ?>" alt="avatar"></td>
-                    <td><a class="btn btn-primary" href="edit_user_page.php/?id=<?= $user->id ?>">edit</a></td>
-                    <td><a class="btn btn-danger" href="delete_user.php/?id=<?= $user->id ?>">delete</a></td>
+                    <td><?= $comment->id ?></td>
+                    <td><?= $comment->photo_id?></td>
+                    <td><?= $comment->user_id?></td>
+                    <td><?= $comment->body?></td>
+                    <td><?= $comment->date?></td>
+                    <td><a class="btn btn-primary" href="edit_comment_page.php/?id=<?= $comment->id ?>">edit</a></td>
+                    <td><a class="btn btn-danger" href="delete_comment.php/?id=<?= $comment->id ?>">delete</a></td>
                 </tr>
 								<?php endforeach; ?>
                 </tbody>
