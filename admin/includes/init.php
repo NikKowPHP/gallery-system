@@ -11,6 +11,7 @@ require_once("database.php");
 require_once("db_object.php");
 require_once("File.php");
 require_once("User.php");
+require_once("Comment.php");
 require_once("photo.php");
 require_once("functions.php");
 require_once("session.php");
