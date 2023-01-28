@@ -37,7 +37,7 @@ if (isset($_GET['id'])) {
 
 
         <!-- /.row -->
-        <form action="/loginsys/admin/includes/edit_comment.php" method="POST" enctype="multipart/form-data">
+        <form action="/loginsys/admin/includes/edit_comment.php/?id=<?= $comment->id ?> " method="POST" >
             <div class="col-md-6">
                 <div class="form-group">
                     <label> photo id
@@ -82,7 +82,7 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
             <div class="form-group">
-                <input class="btn btn-primary" type="submit" name="submit" value="Create">
+                <input class="btn btn-primary" type="submit" name="submit" value="Update">
             </div>
             <div class="form-group">
                 <input class="btn btn-danger" type="submit" name="delete" value="Delete">
