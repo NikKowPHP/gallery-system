@@ -1,7 +1,7 @@
 <?php require_once("includes/header.php") ?>
 <?php
 if (!isset($_GET['id'])) {
- redirect("index.php");
+	redirect("index.php");
 }
 $photo = Photo::get_by_id($_GET['id']);
 $comments = Comment::get_all_by("photo_id", $photo->id);
@@ -41,36 +41,59 @@ $comments = Comment::get_all_by("photo_id", $photo->id);
 
         <!-- Blog Comments -->
 
+			<?php
+			if (isset($_POST['submit'])) {
+
+				$comment = new Comment();
+				$comment->user_id = $session->user_id;
+				$comment->photo_id = $photo->id;
+				$comment->date = date("Y-m-d");
+				$comment->body = $_POST['body'];
+				$comment->save();
+                redirect("post.php?id=$photo->id");
+
+			}
+
+			?>
+
+
         <!-- Comments Form -->
-        <div class="well">
-            <h4>Leave a Comment:</h4>
-            <form role="form" method="POST" action="post.php">
-                <div class="form-group">
-                    <textarea class="form-control" name="body" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" name="submit">Submit</button>
-            </form>
-        </div>
+			<?php if ($session->is_signed_in()): ?>
+          <div class="well">
+              <h4>Leave a Comment:</h4>
+              <form role="form" method="POST" action="post.php?id=<?= $photo->id ?> ">
+                  <div class="form-group">
+                      <textarea class="form-control" name="body" rows="3"></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+              </form>
+          </div>
+			<?php else: ?>
+          <div class="well">
+              you should log in first
+          </div>
+
+			<?php endif; ?>
 
         <hr>
 
         <!-- Posted Comments -->
 
         <!-- Comment -->
-        <?php foreach($comments as $comment): ?>
-        <?php $user = User::get_by_id($comment->user_id); ?>
-        <div class="media">
-            <a class="pull-left" href="#">
-                <img class="media-object" src="http://placehold.it/64x64" alt="">
-            </a>
-            <div class="media-body">
-                <h4 class="media-heading"><?= $user->username ?>
-                    <small><?= $comment->date ?> </small>
-                </h4>
-                <?= $comment->body ?> 
-            </div>
-        </div>
-        <?php endforeach; ?>
+			<?php foreach ($comments as $comment): ?>
+				<?php $user = User::get_by_id($comment->user_id); ?>
+          <div class="media">
+              <a class="pull-left" href="#">
+                  <img class="media-object" src="http://placehold.it/64x64" alt="">
+              </a>
+              <div class="media-body">
+                  <h4 class="media-heading"><?= $user->username ?>
+                      <small><?= $comment->date ?> </small>
+                  </h4>
+								<?= $comment->body ?>
+              </div>
+          </div>
+			<?php endforeach; ?>
 
 
     </div>
