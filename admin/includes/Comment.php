@@ -13,7 +13,7 @@ class Comment extends Db_object
 
 	public static function get_all_by(string $by, int $id)
 	{
-		$sql = "SELECT * FROM comments WHERE $by = $id";
+		$sql = "SELECT * FROM comments WHERE $by = $id ORDER BY date ASC";
 		return self::get_data_by_query($sql);
 	}
 
