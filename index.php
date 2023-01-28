@@ -1,16 +1,20 @@
 <?php include("includes/header.php"); ?>
+<?php $photos = Photo::get_all() ?>
 
 <div class="row">
 
     <!-- Blog Entries Column -->
+
+
+
+    <?php foreach($photos as $photo): ?>
+
     <div class="col-md-8">
+        <a href="post.php?id=<?= $photo->id ?>"><h1><?= $photo->title ?> </h1></a>
 
     </div>
 
-    <form action="index.php" method="post" enctype="multipart/form-data">
-        <input type="file" name="file_upload">
-        <input type="submit">
-    </form>
+    <?php endforeach; ?>
 
 
     <!-- Blog Sidebar Widgets Column -->
