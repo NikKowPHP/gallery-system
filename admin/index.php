@@ -124,6 +124,7 @@
 
 
             </div> <!--First Row-->
+            <div id="piechart" style="width: 900px; height: 500px;"></div>
         </div>
         <!-- /.container-fluid -->
 			<?php include_once("includes/sidebar_nav.php"); ?>
