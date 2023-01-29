@@ -9,10 +9,12 @@ if (empty($_GET['id'])) {
 }
 if (isset($_POST['delete'])) {
 	$comment->delete();
+	$session->message = "The comment $comment->id has successfully deleted";
 	redirect("admin/comments.php");
 } elseif ($_GET['delete']) {
 	$comment->delete();
 	$photo_id = $_GET['p_id'];
+	$session->message = "The comment $comment->id has successfully deleted";
 	redirect("admin/comments.php/?id=$photo_id");
 
 }
