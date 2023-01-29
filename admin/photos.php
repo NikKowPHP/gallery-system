@@ -1,6 +1,8 @@
 <?php include("includes/header.php"); ?>
 <?php include("includes/top_nav.php"); ?>
-
+<?php  
+    $photos = Photo::get_all();
+?>
     <div id="page-wrapper">
 
     <div class="container-fluid">
@@ -43,9 +45,9 @@
                 <tbody>
                 <tr>
 									<?php
-									$photos = Photo::get_all();
 									foreach ($photos
 									as $photo):
+                                    $comments_count = Comment::count_by("photo_id", $photo->id);
 									?>
                     <td><img width="100" src="<?= $photo->get_file_path() ?>" alt="<?= $photo->title ?>"></td>
                     <td><?= $photo->id ?></td>
@@ -54,7 +56,7 @@
                     <td><?= $photo->filename ?></td>
                     <td><?= $photo->filetype ?></td>
                     <td><?= $photo->size ?></td>
-                    <td><a class="btn btn-default" href="/loginsys/admin/comments.php/?id=<?= $photo->id ?>">comments</a></td>
+                    <td><a class="btn btn-default" href="/loginsys/admin/comments.php/?id=<?= $photo->id ?>">comments: <?= $comments_count ?> </a></td>
                     <td><a class="btn btn-info" href="/loginsys/post.php?id=<?= $photo->id ?>">view</a></td>
                     <td><a class="btn btn-primary" href="edit_photo_page.php/?id=<?= $photo->id ?>">edit</a></td>
                     <td><a class="btn btn-danger" href="delete_photo.php/?id=<?= $photo->id ?>">delete</a></td>
