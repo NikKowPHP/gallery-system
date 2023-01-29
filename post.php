@@ -30,7 +30,7 @@ $comments = Comment::get_all_by("photo_id", $photo->id);
         <hr>
 
         <!-- Preview Image -->
-        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+        <img class="img-responsive" src="<?= $photo->get_file_path() ?> " alt="">
 
         <hr>
 

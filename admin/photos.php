@@ -34,6 +34,8 @@
                     <th>File Name</th>
                     <th>File type</th>
                     <th>Size</th>
+                    <th>Comments</th>
+                    <th>View</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -43,7 +45,6 @@
 									<?php
 									$photos = Photo::get_all();
 									foreach ($photos
-
 									as $photo):
 									?>
                     <td><img width="100" src="<?= $photo->get_file_path() ?>" alt="<?= $photo->title ?>"></td>
@@ -53,6 +54,8 @@
                     <td><?= $photo->filename ?></td>
                     <td><?= $photo->filetype ?></td>
                     <td><?= $photo->size ?></td>
+                    <td><a class="btn btn-default" href="/loginsys/admin/comments.php/?id=<?= $photo->id ?>">comments</a></td>
+                    <td><a class="btn btn-info" href="/loginsys/post.php?id=<?= $photo->id ?>">view</a></td>
                     <td><a class="btn btn-primary" href="edit_photo_page.php/?id=<?= $photo->id ?>">edit</a></td>
                     <td><a class="btn btn-danger" href="delete_photo.php/?id=<?= $photo->id ?>">delete</a></td>
                 </tr>
