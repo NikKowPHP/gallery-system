@@ -62,7 +62,7 @@
                         <td><?= $comment->date ?></td>
                         <td><a class="btn btn-primary" href="edit_comment_page.php/?id=<?= $comment->id ?>">edit</a>
                         </td>
-                        <td><a class="btn btn-danger" href="delete_comment.php/?id=<?= $comment->id ?>">delete</a></td>
+                        <td><a class="btn btn-danger" href="/loginsys/admin/includes/edit_comment.php/?delete=1&id=<?= $comment->id ?>&p_id=<?= $_GET['id'] ?>">delete</a></td>
                     </tr>
 										<?php endforeach; ?>
                     </tbody>
