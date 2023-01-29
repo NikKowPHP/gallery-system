@@ -1,4 +1,5 @@
 <?php
+
 class Comment extends Db_object
 {
 
@@ -11,10 +12,21 @@ class Comment extends Db_object
 	public ?string $date = null;
 
 
-	public static function get_all_by(string $by, int $id)
+	public static function get_all_by(string $by, int $id): array
 	{
 		$sql = "SELECT * FROM comments WHERE $by = $id ORDER BY date ASC";
 		return self::get_data_by_query($sql);
+	}
+
+	public static function count_by(string $by, int $id): int
+	{
+		global $database;
+		$sql = "SELECT COUNT('id') FROM comments WHERE $by = $id";
+		$data = $database->query($sql);
+		$fetch = $data->fetch_array();
+		return (int)array_shift($fetch);
+
+
 	}
 
 
