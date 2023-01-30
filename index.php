@@ -9,10 +9,16 @@
 
     <?php foreach($photos as $photo): ?>
 
-    <div class="col-md-8">
-        <a href="post.php?id=<?= $photo->id ?>"><h1><?= $photo->title ?> </h1></a>
+    <article class="photo_article col-md-8">
 
-    </div>
+
+        <h1><a href="post.php?id=<?= $photo->id ?>"><?= $photo->title ?> </a></h1>
+        <figure>
+            <img class="index_post_photo" src="<?= $photo->get_file_path() ?> " alt="">
+        </figure>
+        <p><?= $photo->description ?> </p>
+
+    </article>
 
     <?php endforeach; ?>
 
