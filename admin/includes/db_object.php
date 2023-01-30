@@ -108,5 +108,25 @@ class Db_object
 		}
 		return $this;
 	}
+	public static function count(): int
+	{
+		global $database;
+		$sql = "SELECT COUNT('id') FROM . static::$db_table";
+		$data = $database->query($sql);
+		$fetch = $data->fetch_array();
+		return (int)array_shift($fetch);
+
+
+	}
+	public static function count_by(string $by, int $id): int
+	{
+		global $database;
+		$sql = "SELECT COUNT('id') FROM . static::$db_table . WHERE $by = $id";
+		$data = $database->query($sql);
+		$fetch = $data->fetch_array();
+		return (int)array_shift($fetch);
+
+
+	}
 
 }
