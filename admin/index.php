@@ -57,7 +57,7 @@
                                     <i class="fa fa-photo fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">7</div>
+                                    <div class="huge"><?= Photo::count() ?> </div>
                                     <div>Photos</div>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
                                     <i class="fa fa-user fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">8
+                                    <div class="huge"><?= User::count() ?>
 
                                     </div>
 
@@ -107,7 +107,7 @@
                                     <i class="fa fa-support fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">8</div>
+                                    <div class="huge"><?= Comment::count() ?> </div>
                                     <div>Comments</div>
                                 </div>
                             </div>
@@ -124,7 +124,7 @@
 
 
             </div> <!--First Row-->
-            <div id="piechart" style="width: 900px; height: 500px;"></div>
+            <div id="piechart" style="max-width: 900px; height: 500px;"></div>
         </div>
         <!-- /.container-fluid -->
 			<?php include_once("includes/sidebar_nav.php"); ?>
