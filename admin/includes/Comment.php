@@ -18,7 +18,7 @@ class Comment extends Db_object
 		return self::get_data_by_query($sql);
 	}
 
-	public static function count_by(string $by, int $id): int
+	public static function count(string $by, int $id): int
 	{
 		global $database;
 		$sql = "SELECT COUNT('id') FROM comments WHERE $by = $id";

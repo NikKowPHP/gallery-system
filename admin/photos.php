@@ -47,7 +47,7 @@
 									<?php
 									foreach ($photos
 									as $photo):
-                                    $comments_count = Comment::count_by("photo_id", $photo->id);
+                                    $comments_count = Comment::count("photo_id", $photo->id);
 									?>
                     <td><img width="100" src="<?= $photo->get_file_path() ?>" alt="<?= $photo->title ?>"></td>
                     <td><?= $photo->id ?></td>
