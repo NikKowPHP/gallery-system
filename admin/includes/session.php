@@ -5,10 +5,12 @@ class Session
 	private bool $signed_in = false;
 	public int $user_id;
 	public string $message;
+	public int $count;
 
 	function __construct()
 	{
 		session_start();
+		$this->visitor_count();
 		$this->check_login();
 		$this->check_message();
 	}
@@ -65,6 +67,16 @@ class Session
 			$this->message = "";
 		}
 	}
+
+	public function visitor_count()
+	{
+		if(isset($_SESSION['count'])) {
+			return $this->count = $_SESSION['count']++;
+		} else {
+			return $_SESSION['count'] = 1;
+		}
+	}
+
 
 
 }
