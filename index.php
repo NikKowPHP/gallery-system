@@ -13,57 +13,54 @@ $photos = Photo::get_data_by_query($sql);
 
 <div class="row">
     <!-- Blog Entries Column -->
-    <?php foreach($photos as $photo): ?>
+	<?php foreach ($photos as $photo): ?>
 
-    <article class="photo_article col-md-8">
-        <h1><a href="post.php?id=<?= $photo->id ?>"><?= $photo->title ?> </a></h1>
-        <figure>
-            <img class="index_post_photo" src="<?= $photo->get_file_path() ?> " alt="">
-        </figure>
-        <p><?= $photo->description ?> </p>
-    </article>
+      <article class="photo_article col-md-8">
+          <h1><a href="post.php?id=<?= $photo->id ?>"><?= $photo->title ?> </a></h1>
+          <figure>
+              <img class="index_post_photo" src="<?= $photo->get_file_path() ?> " alt="">
+          </figure>
+          <p><?= $photo->description ?> </p>
+      </article>
 
-    <?php endforeach; ?>
+	<?php endforeach; ?>
 
     <div class="row col-md-6">
 
-			<?php
-			echo "<pre>";
-			print_r($paginate);
-			echo "</pre>";
-
-			?>
 
         <ul class="pagination">
 
-          <?php
-          if($paginate->page_total() > 1) {
+					<?php
+					if ($paginate->page_total() > 1) {
 
-              if ($paginate->has_next()) {
-                  echo "            
-                <li class='page-item'>
-                 <a class='page-link' 
-                 href='/loginsys/index.php?page={$paginate->next()}'>Next</a>
-                </li>
-            ";
-              }
-
-
+						if ($paginate->has_previous()) {
+							echo "            
+                               <li class='page-item'>
+                                    <a class='page-link' 
+                                    href='/loginsys/index.php?page={$paginate->previous()}'>Previous</a>
+                                </li>
+                                ";
+						}
 
 
-              if($paginate->has_previous()) {
-                  echo "            
-                    <li class='page-item'>
-                    <a class='page-link' 
-                    href='/loginsys/index.php?page={$paginate->previous()}'>Previous</a>
-                    </li>
-                  ";
-              }
-          }
+						for ($i = 1; $i <= $paginate->page_total(); $i++) {
+							if ($i == $paginate->current_page) {
+								echo "<li class='page-item active'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
+							} else {
+								echo "<li class='page-item'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
+							}
+						}
+						if ($paginate->has_next()) {
+							echo "            
+                                <li class='page-item'>
+                                    <a class='page-link' 
+                                        href='/loginsys/index.php?page={$paginate->next()}'>Next</a>
+                                </li>
+                    ";
+						}
+					}
 
-          ?>
-
-
+					?>
 
 
         </ul>
