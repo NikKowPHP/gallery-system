@@ -27,7 +27,7 @@ class Db_object
 		return $props;
 	}
 
-	protected static function get_data_by_query($sql): array
+	public static function get_data_by_query($sql): array
 	{
 		global $database;
 		$objects_arr = [];
