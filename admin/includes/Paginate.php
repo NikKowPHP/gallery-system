@@ -15,15 +15,11 @@ class Paginate
 
 	public function next()
 	{
-		return $this->current_page += 1;
+		return $this->current_page + 1;
 	}
 	public function previous():int
 	{
-		if($this->current_page !== 1) {
-			return $this->current_page -= 1;
-		}else {
-			return false;
-		}
+			return $this->current_page - 1;
 	}
 	public function page_total():int
 	{
@@ -32,6 +28,10 @@ class Paginate
 	public function has_next():bool
 	{
 		return $this->next() <= $this->page_total();
+	}
+	public function has_previous():bool
+	{
+		return ($this->current_page > 1);
 	}
 	public function offset()
 	{
