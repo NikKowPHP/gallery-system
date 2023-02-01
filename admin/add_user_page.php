@@ -1,5 +1,6 @@
 <?php include("includes/header.php"); ?>
 <?php include("includes/top_nav.php"); ?>
+<?php require_once ("includes/modal.php")?>
 
     <div id="page-wrapper">
 
@@ -22,6 +23,14 @@
                 </ol>
             </div>
         </div>
+
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            Launch demo modal
+        </button>
+
+        <!-- Modal -->
 
 
         <!-- /.row -->

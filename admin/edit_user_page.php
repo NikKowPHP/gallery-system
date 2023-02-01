@@ -8,6 +8,8 @@ if (isset($_GET['id'])) {
 	redirect("admin/users.php");
 }
 ?>
+    <!-- Button trigger modal -->
+
     <div id="page-wrapper">
 
     <div class="container-fluid">
@@ -59,7 +61,7 @@ if (isset($_GET['id'])) {
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <img width="500" src="<?= $user->avatar_placeholder_path() ?>" alt="user avatar">
+                    <a href="#" data-toggle="modal" data-target="#modal"> <img width="500" src="<?= $user->avatar_placeholder_path() ?>" alt="user avatar"></a>
                 </div>
                 <div class="form-group">
                     <input type="file" name="new_avatar_file" class="form-control">
@@ -68,6 +70,7 @@ if (isset($_GET['id'])) {
                 <input class="btn btn-danger" type="submit" name="delete" value="Delete">
             </div>
         </form>
+
         <!-- /.container-fluid -->
 			<?php include_once("includes/sidebar_nav.php"); ?>
 
