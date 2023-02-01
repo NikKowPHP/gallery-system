@@ -1,5 +1,7 @@
 <?php include("includes/header.php"); ?>
 <?php include("includes/top_nav.php"); ?>
+<?php require_once("includes/modal.php"); ?>
+
 
 <?php
 if (isset($_GET['id'])) {
@@ -32,7 +34,6 @@ if (isset($_GET['id'])) {
             </div>
         </div>
 
-
         <!-- /.row -->
         <form action="/loginsys/admin/includes/edit_user.php/?id=<?= $user->id ?>" method="POST"
               enctype="multipart/form-data">
@@ -61,13 +62,13 @@ if (isset($_GET['id'])) {
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <a href="#" data-toggle="modal" data-target="#modal"> <img width="500" src="<?= $user->avatar_placeholder_path() ?>" alt="user avatar"></a>
+                  <img id="user_image" width="500" src="<?= $user->avatar_placeholder_path() ?>" alt="user avatar">
                 </div>
                 <div class="form-group">
                     <input type="file" name="new_avatar_file" class="form-control">
                 </div>
                 <input class="btn btn-primary" type="submit" name="submit" value="Edit">
-                <input class="btn btn-danger" type="submit" name="delete" value="Delete">
+                <input class="btn btn-danger" id="user_id" data-user-id="<?= $user->id ?> " type="submit" name="delete" value="Delete">
             </div>
         </form>
 

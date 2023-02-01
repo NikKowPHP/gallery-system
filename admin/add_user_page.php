@@ -24,15 +24,6 @@
             </div>
         </div>
 
-
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-            Launch demo modal
-        </button>
-
-        <!-- Modal -->
-
-
         <!-- /.row -->
         <form action="/loginsys/admin/includes/add_user.php" method="POST" enctype="multipart/form-data">
             <div class="col-md-6">
