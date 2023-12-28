@@ -12,5 +12,5 @@ spl_autoload_register(function ($class) {
 
 function redirect(string $location):void
 {
-	header("Location: /loginsys/{$location}");
+	header("Location: /gallery-system/{$location}");
 }
