@@ -1,5 +1,4 @@
 <?php include("init.php"); ?>
-<?php if (!$session->is_signed_in()) redirect("login_page.php"); ?>
 
 <?php
 
@@ -15,6 +14,7 @@ if (isset($_POST['submit'])) {
 	$user = $user->iterate_post($_POST);
 
 	if($user->save()) {
+		$session->login($user);
 		$session->message = "The user $user->username successfully created";
 		redirect("admin/users.php");
 

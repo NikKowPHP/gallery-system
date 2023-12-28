@@ -106,9 +106,9 @@
                                 <div class="col-xs-3">
                                     <i class="fa fa-support fa-5x"></i>
                                 </div>
-                                <div class="col-xs-9 text-right">
+                                <!-- <div class="col-xs-9 text-right">
                                     <div class="huge"><?= Comment::count() ?> </div>
-                                    <div>Comments</div>
+                                    <div>Comments</div> -->
                                 </div>
                             </div>
                         </div>
@@ -126,10 +126,6 @@
             </div> <!--First Row-->
             <div id="piechart" style="max-width: 900px; height: 500px;"></div>
         </div>
-        <!-- /.container-fluid -->
-			<?php include_once("includes/sidebar_nav.php"); ?>
 
     </div>
-    <!-- /#page-wrapper -->
-
-<?php include("includes/footer.php"); ?>
+<?= include("./includes/footer.php"); ?>

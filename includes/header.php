@@ -1,5 +1,5 @@
 <?php ob_start() ?>
-<?php require_once ("admin/includes/init.php")?>
+<?php require_once ("./config/init.php")?>
 
 <!DOCTYPE html>
 <html lang="en">

@@ -8,11 +8,11 @@ defined('ADMIN_ROOT') ? null : define('ADMIN_ROOT', SITE_ROOT . DS . 'admin');
 defined('ADMIN_INCLUDES') ? null : define('ADMIN_INCLUDES', ADMIN_ROOT . DS . 'includes');
 defined('UPLOADS_PATH') ? null : define('UPLOADS_PATH', SITE_ROOT . DS . "public" . DS . "uploads");
 
-// Require necessary files using require_once statements
-$required_files = ["session.php", "new_config.php", "database.php", "db_object.php", "File.php", "User.php", "Comment.php", "Photo.php", "functions.php", "Paginate.php"];
+// // Require necessary files using require_once statements
+// $required_files = ["session.php", "new_config.php", "database.php", "db_object.php", "File.php", "User.php", "Comment.php", "Photo.php", "functions.php", "Paginate.php"];
 
-foreach ($required_files as $file) {
-    require_once($file);
-}
+// foreach ($required_files as $file) {
+//     require_once($file);
+// }
 
 
