@@ -1,78 +1,19 @@
-<?php include("includes/header.php"); ?>
-<?php $photos = Photo::get_all() ?>
 <?php
-$page = !empty($_GET['page']) ? (int)$_GET['page'] : 1;
-$items_per_page = 3;
-$items_total_count = Photo::count();
-$paginate = new Paginate($page, $items_per_page, $items_total_count);
+require_once(__DIR__ . '/src/views/templates/BaseTemplate.php');
+use Templates\BaseTemplate;
 
-$sql = "SELECT * FROM photos LIMIT $items_per_page OFFSET {$paginate->offset()}";
-$photos = Photo::get_data_by_query($sql);
+ob_start();
 
+$header = '/src/views/partials/header.php';
+$footer =  '/src/views/partials/footer.php';
+$bodyContent = '/src/views/main_body_content.php';
+$navLink = '/src/views/partials/navigation.php';
+$asideLink = '/src/views/partials/sidebar.php';
+
+
+$template = new BaseTemplate($header, $footer);
+$template->setBody($bodyContent);
+$template->setNav($navLink);
+$template->setAside($asideLink);
+$template->render();
 ?>
-
-<div class="row">
-    <!-- Blog Entries Column -->
-	<?php foreach ($photos as $photo): ?>
-
-      <article class="photo_article col-md-8">
-          <h1><a href="post.php?id=<?= $photo->id ?>"><?= $photo->title ?> </a></h1>
-          <figure>
-              <img class="index_post_photo" src="<?= $photo->get_file_path() ?> " alt="">
-          </figure>
-          <p><?= $photo->description ?> </p>
-      </article>
-
-	<?php endforeach; ?>
-
-    <div class="row col-md-6">
-
-
-        <ul class="pagination">
-
-					<?php
-					if ($paginate->page_total() > 1) {
-
-						if ($paginate->has_previous()) {
-							echo "            
-                               <li class='page-item'>
-                                    <a class='page-link' 
-                                    href='/loginsys/index.php?page={$paginate->previous()}'>Previous</a>
-                                </li>
-                                ";
-						}
-
-
-						for ($i = 1; $i <= $paginate->page_total(); $i++) {
-							if ($i == $paginate->current_page) {
-								echo "<li class='page-item active'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
-							} else {
-								echo "<li class='page-item'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
-							}
-						}
-						if ($paginate->has_next()) {
-							echo "            
-                                <li class='page-item'>
-                                    <a class='page-link' 
-                                        href='/loginsys/index.php?page={$paginate->next()}'>Next</a>
-                                </li>
-                    ";
-						}
-					}
-
-					?>
-
-
-        </ul>
-    </div>
-    <!-- Blog Sidebar Widgets Column -->
-    <div class="col-md-4">
-
-			<?php include("includes/sidebar.php"); ?>
-
-    </div>
-
-    <!-- /.row -->
-
-
-	<?php include("includes/footer.php"); ?>
