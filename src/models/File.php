@@ -2,17 +2,10 @@
 
 class File extends Db_object
 {
-//	protected static string $db_table = "photos";
-//	protected static array $db_table_fields = ['title','alt', 'description', 'filename', 'filetype', 'size'];
-//	public ?int $id = null;
-//	public ?string $title = null;
-//	public ?string $alt = null;
-//	public ?string $description = null;
-
+	protected static array $db_table_fields = ['name', 'type', 'size', 'upload_dir'];
 	public ?string $name = null;
 	public ?string $type = null;
 	public ?int $size = null;
-
 	public ?string $tmp_path = null;
 	public ?string $upload_dir = null;
 
@@ -30,20 +23,21 @@ class File extends Db_object
 	public array $custom_errors = [];
 
 
-	public function __construct(string $upload_dir)
+	public function __construct(string $upload_dir, array $file)
 	{
 		$this->upload_dir = $upload_dir;
+		$this->init($file);
 	}
 
 	public function path(): string
 	{
-		return ADMIN_UPLOADS_PATH . DS . $this->upload_dir . DS . $this->name;
+		return PUBLIC_FOLDER . DS . $this->upload_dir . DS . $this->name;
 	}
 
 
 	public function init(array $file): bool
 	{
-		if (empty($file)) {
+		if (empty($file) || !$file || !is_array($file)) {
 			$this->custom_errors[] = "THERE WAS NO FILE UPLOADED";
 			return false;
 		} elseif ($file['error'] != 0) {
@@ -64,7 +58,7 @@ class File extends Db_object
 			$this->custom_errors[] = "the file was not available";
 			return false;
 		}
-		$target_path = ADMIN_ROOT . DS . $this->upload_dir . DS . $this->name;
+		$target_path = PUBLIC_FOLDER . DS . $this->upload_dir . DS . $this->name;
 
 		if (file_exists($target_path)) {
 			$this->custom_errors[] = "the file $this->name already exists";
@@ -79,9 +73,9 @@ class File extends Db_object
 		}
 	}
 
-	public static function delete_file(string $upload_dir, string $filename): bool
+	public static function remove(string $upload_dir, string $filename): bool
 	{
-		return unlink(ADMIN_ROOT . DS . $upload_dir . DS . $filename) ?? true;
+		return unlink(PUBLIC_FOLDER . DS . $upload_dir . DS . $filename) ?? true;
 	}
 
 }
