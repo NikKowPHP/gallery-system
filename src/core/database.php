@@ -1,5 +1,6 @@
 <?php
-require_once("new_config.php");
+require_once(SITE_ROOT . "/config/config.php");
+
 
 class Database
 {
