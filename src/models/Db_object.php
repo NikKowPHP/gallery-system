@@ -1,4 +1,5 @@
 <?php
+namespace Models;
 class Db_object
 {
 	private static function instantiate($db_row): ?self
@@ -38,12 +39,12 @@ class Db_object
 
 	}
 
-	public static function get_all(): array|string
+	public static function get_all(): array|bool
 	{
 		$query = "SELECT * FROM " . static::$db_table;
 		$result_set = static::get_data_by_query($query);
 		if(!$result_set || empty($result_set)) {
-			echo "There is no data";
+			return false;
 		}
 		return $result_set;
 

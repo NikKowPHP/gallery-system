@@ -1,4 +1,5 @@
 <?php
+namespace Core;
 require_once(SITE_ROOT . "/config/config.php");
 
 
@@ -14,7 +15,7 @@ class Database
 
 	public function open_db_connection()
 	{
-		$this->connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+		$this->connection = new \mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 		if ($this->connection->connect_errno) {
 			die("DATABASE connection failed" . $this->connection->connect_error);
 		}
