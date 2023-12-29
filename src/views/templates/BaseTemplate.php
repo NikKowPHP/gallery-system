@@ -1,7 +1,9 @@
 <?php
-namespace Gallery\Views\Templates;
+namespace Templates;
+require_once('./config/init.php');
 class BaseTemplate
 {
+	protected array $fields = [];
 	protected $header;
 	protected $footer;
 	protected $body;
@@ -11,31 +13,37 @@ class BaseTemplate
 	public function __construct($header, $footer)
 	{
 		$this->header = $header;
-		$this->footer = $footer;
 		$this->body = '';
-		$this->aside = '';
 		$this->nav = '';
+		$this->aside = '';
+		$this->footer = $footer;
+		// Change the render order
+		$this->fields = ['header', 'nav', 'body', 'aside', 'footer'];
 	}
 	public function setBody($bodyContent)
 	{
 		$this->body = $bodyContent;
 	}
-	public function setAside($asideContent)
+	public function setAside($asideLink)
 	{
-		$this->aside = $asideContent;
+		$this->aside = $asideLink;
 	}
 	public function setNav($navContent)
 	{
 		$this->nav = $navContent;
 	}
+	public function includeParts()
+	{
+		foreach ($this->fields as $field) {
+			if (!empty($this->{$field})) {
+				include(SITE_ROOT . $this->{$field});
+			}
+		}
+	}
 
 	public function render()
 	{
-		echo $this->header;
-		echo $this->nav;
-		echo $this->aside;
-		echo $this->body;
-		echo $this->footer;
+		$this->includeParts();
 	}
 
 }
