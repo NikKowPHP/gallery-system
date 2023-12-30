@@ -1,4 +1,5 @@
 <?php
+namespace Models;
 
 class Session
 {
@@ -76,9 +77,10 @@ class Session
 			return $_SESSION['count'] = 1;
 		}
 	}
-
-
-
+	public function destroy():void
+	{
+			unset($this->user_id);
+			$this->signed_in = false;
+			session_destroy();
+	}
 }
-
-$session = new Session();
