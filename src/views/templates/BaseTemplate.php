@@ -1,6 +1,6 @@
 <?php
 namespace Templates;
-require_once('./config/init.php');
+require_once(__DIR__ .'/../../../autoload.php');
 class BaseTemplate
 {
 	protected array $fields = [];
