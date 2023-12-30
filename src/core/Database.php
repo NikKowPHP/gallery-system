@@ -1,16 +1,26 @@
 <?php
 namespace Core;
+
 require_once(SITE_ROOT . "/config/config.php");
 
 
 class Database
 {
-	public $connection;
+	private static ?Database $instance = null;
+	public \mysqli $connection;
 
-	function __construct()
+	public function __construct()
 	{
 		$this->open_db_connection();
 	}
+	public static function get_instance(): Database
+	{
+		if (self::$instance === null) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
+
 
 
 	public function open_db_connection()
