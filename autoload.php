@@ -13,22 +13,19 @@ spl_autoload_register(function ($class_name) {
 		'Templates' => SITE_ROOT . '/src/views/templates/',
 		'Core' => SITE_ROOT . '/src/core/',
 	];
-	foreach ($paths as $namespace => $path) {
-		if (substr($class_name, 0, strlen($namespace)) === $namespace) {
-			$file = $path . substr($class_name, strlen($namespace) + 1) . '.php';
 
-			if (file_exists($file)) {
-				require_once($file);
-				return true;
+	if (strpos($class_name, '\\') !== false) {
+		foreach ($paths as $namespace => $path) {
+			// Check if the class name starts with the defined namespace
+			if (strpos($class_name, $namespace . '\\') === 0) {
+				$file = $path . str_replace('\\', '/', substr($class_name, strlen($namespace) + 1)) . '.php';
+
+				if (file_exists($file)) {
+					require_once($file);
+					return true;
+				}
 			}
 		}
 	}
-
-	// If the class was not found in any of the specified paths, return false
-	var_dump($file);
 	return false;
-
-	if (file_exists($file)) {
-		require_once($file);
-	}
 });
