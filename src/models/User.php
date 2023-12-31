@@ -1,4 +1,7 @@
 <?php
+namespace Models;
+use Models\Db_object;
+use Core\Database;
 
 class User extends Db_object
 {
@@ -20,9 +23,9 @@ class User extends Db_object
 
 	public static function verify_user(string $username, string $password)
 	{
-		global $database;
-		$username = $database->escape_string($username);
-		$password = $database->escape_string($password);
+		self::check_database_instance();
+		$username = self::$database->escape_string($username);
+		$password = self::$database->escape_string($password);
 		$sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password' LIMIT 1";
 		$result_arr = self::get_data_by_query($sql);
 

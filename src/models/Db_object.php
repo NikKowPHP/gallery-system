@@ -12,7 +12,7 @@ class Db_object
 		self::$database = Database::get_instance();
 	}
 
-	private static function check_database_instance(): void
+	protected static function check_database_instance(): void
 	{
 		if (!isset(self::$database)) {
 			self::set_database(Database::get_instance());
@@ -143,7 +143,7 @@ class Db_object
 			$sql = "SELECT COUNT('id') FROM " . static::$db_table . " WHERE $by = $id";
 			var_dump($sql);
 		}
-		
+
 		$data = self::$database->query($sql);
 		$fetch = $data->fetch_array();
 		return (int) array_shift($fetch);
