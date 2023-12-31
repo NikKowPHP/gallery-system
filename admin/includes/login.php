@@ -1,6 +1,12 @@
 <?php
+use Models\Session;
+use Models\User;
+use Models\Location;
+require_once(__DIR__."/../../autoload.php");
+require_once(__DIR__ . "/../../src/utils/functions.php");
 
-require_once("init.php");
+$session = new Session();
+
 
 if ($session->is_signed_in()) {
 	redirect("index.php");
@@ -17,13 +23,18 @@ if (isset($_POST['submit'])) {
 		$session->login($user_found);
 		redirect("admin/index.php");
 	} else {
-		// $session->message($user_found);
-		// $session->message("Entered the wrong password or username");
-		// redirect("login_page.php");
+		$user = new User();
+		$user->iterate_post($_POST);
+		display_pretty_data($user);
+		if($user->create()) {
+			$session->set_message("User has been created");
+			Location::redirect("admin/index.php");
+		}
 	}
 } else {
 	$username = "";
 	$password = "";
 }
 
+if(!empty($session->get_message())) echo "<h1>$session->get_message()</h1>";
 
