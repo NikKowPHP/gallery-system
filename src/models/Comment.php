@@ -1,4 +1,6 @@
 <?php
+namespace Models;
+use Models\Db_object;
 
 class Comment extends Db_object
 {

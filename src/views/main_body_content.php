@@ -1,3 +1,4 @@
+<?php use Models\Photo; ?>
 <div class="photos-section mx-auto">
     <?php $photos = Photo::get_all() ?>
     <?php if (!empty($photos)): ?>
