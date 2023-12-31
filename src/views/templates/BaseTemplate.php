@@ -1,6 +1,8 @@
 <?php
 namespace Templates;
-require_once(__DIR__ .'/../../../autoload.php');
+
+require_once(__DIR__ . '/../../../autoload.php');
+require_once(__DIR__ . '/../../utils/functions.php');
 class BaseTemplate
 {
 	protected array $fields = [];
@@ -13,24 +15,21 @@ class BaseTemplate
 	public function __construct($header, $footer)
 	{
 		$this->header = $header;
-		$this->body = '';
-		$this->nav = '';
-		$this->aside = '';
 		$this->footer = $footer;
 		// Change the render order
 		$this->fields = ['header', 'nav', 'body', 'aside', 'footer'];
 	}
-	public function setBody($bodyContent)
+	public function setBody(string $bodyContentLink)
 	{
-		$this->body = $bodyContent;
+		$this->body = $bodyContentLink;
 	}
-	public function setAside($asideLink)
+	public function setAside($asideContentLink)
 	{
-		$this->aside = $asideLink;
+		$this->aside = $asideContentLink;
 	}
-	public function setNav($navContent)
+	public function setNav($navContentLink)
 	{
-		$this->nav = $navContent;
+		$this->nav = $navContentLink;
 	}
 	public function includeParts()
 	{
