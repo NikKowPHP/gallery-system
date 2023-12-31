@@ -5,12 +5,14 @@ class Session
 {
 	private bool $signed_in = false;
 	public int $user_id;
-	public string $message;
+	private string $message;
 	public int $count;
 
 	function __construct()
 	{
-		session_start();
+		if (session_status() === PHP_SESSION_NONE) {
+			session_start();
+		}
 		$this->visitor_count();
 		$this->check_login();
 		$this->check_message();
@@ -49,7 +51,7 @@ class Session
 		$this->signed_in = false;
 	}
 
-	public function message($msg = "")
+	public function set_message(string $msg = "")
 	{
 		if (!empty($msg)) {
 			$_SESSION['message'] = $msg;
@@ -57,6 +59,10 @@ class Session
 		} else {
 			return $this->message;
 		}
+	}
+	public function get_message(): string
+	{
+		return $this->message;
 	}
 
 	private function check_message()
@@ -71,16 +77,16 @@ class Session
 
 	public function visitor_count()
 	{
-		if(isset($_SESSION['count'])) {
+		if (isset($_SESSION['count'])) {
 			return $this->count = $_SESSION['count']++;
 		} else {
 			return $_SESSION['count'] = 1;
 		}
 	}
-	public function destroy():void
+	public function destroy(): void
 	{
-			unset($this->user_id);
-			$this->signed_in = false;
-			session_destroy();
+		unset($this->user_id);
+		$this->signed_in = false;
+		session_destroy();
 	}
 }
