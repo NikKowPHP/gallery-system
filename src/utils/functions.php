@@ -1,5 +1,7 @@
 <?php
-function redirect(string $location):void
+function display_pretty_data($data) :void
 {
-	header("Location: /gallery-system/{$location}");
+	echo "<pre>";
+	print_r($data);
+	echo "</pre>";
 }
