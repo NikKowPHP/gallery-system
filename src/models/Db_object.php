@@ -38,6 +38,7 @@ class Db_object
 
 	protected function properties(): array
 	{
+		self::check_database_instance();
 		$props = [];
 		foreach (static::$db_table_fields as $field) {
 			if (property_exists($this, $field)) {
@@ -53,7 +54,6 @@ class Db_object
 
 		$objects_arr = [];
 		$rows = self::$database->query($sql);
-		var_dump($rows);
 		while ($row = $rows->fetch_assoc()) {
 			$objects_arr[] = static::instantiate($row);
 		}
@@ -79,6 +79,7 @@ class Db_object
 
 	public function save()
 	{
+		self::check_database_instance();
 		return isset($this->id) ? $this->update() : $this->create();
 	}
 
@@ -114,7 +115,6 @@ class Db_object
 		$sql = "UPDATE " . static::$db_table . " SET " . implode(", ", $props_pairs) . " WHERE id = $this->id";
 		self::$database->query($sql);
 		return self::$database->connection->affected_rows === 1;
-
 	}
 
 	public function delete(): bool
@@ -141,7 +141,6 @@ class Db_object
 			$sql = "SELECT COUNT('id') FROM " . static::$db_table;
 		} else {
 			$sql = "SELECT COUNT('id') FROM " . static::$db_table . " WHERE $by = $id";
-			var_dump($sql);
 		}
 
 		$data = self::$database->query($sql);
