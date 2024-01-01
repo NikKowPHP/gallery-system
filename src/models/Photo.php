@@ -1,22 +1,22 @@
 <?php
 namespace Models;
+
 use Models\Db_object;
 
 class Photo extends Db_object
 {
 	protected static string $db_table = "photos";
-	protected static array $db_table_fields = ['title', 'alt', 'description', 'file_id' ];
+	protected static array $db_table_fields = ['title', 'alt', 'description', 'file_id'];
 	public ?int $id = null;
 	public ?string $title = null;
 	public ?string $alt = null;
 	public ?string $description = null;
+	public ?int $file_id = null;
 	public ?File $file = null;
 	public ?string $upload_dir = "images";
 
-	public function __construct(File $file, string $title, string $alt)
+	public function __construct(File $file)
 	{
-		$this->title = $title;
-		$this->alt = $alt;
 		$this->setFile($file);
 	}
 	public function setDescription(string $description)
@@ -32,31 +32,29 @@ class Photo extends Db_object
 	public function save(): bool
 	{
 		if ($this->id) {
-			$this->update();
-			return true;
+			return $this->update();
 		}
-		if(!$this->file->upload()) {
+		if (!$this->file->upload() || !$this->file->save()) {
 			return false;
 		}
-
-		if($this->create()) {
-			return true;
-		} else {
-			$this->file->remove($this->upload_dir, $this->file->name);
-			return false;
-		}
-
+		$this->file_id = $this->file->id;
+		return $this->create() ? true : $this->handleUploadFailure();
 	}
-
-	public function update(): bool
+	private function handleUploadFailure(): bool
 	{
-
+		$this->file->remove($this->upload_dir, $this->file->name);
+		return false;
 	}
 
-	public function remove(): bool
-	{
+	// public function update(): bool
+	// {
 
-	}
+	// }
+
+	// public function remove(): bool
+	// {
+
+	// }
 
 
 }
