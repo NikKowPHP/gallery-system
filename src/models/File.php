@@ -1,10 +1,13 @@
 <?php
 namespace Models;
+
 use Models\Db_object;
 
 class File extends Db_object
 {
 	protected static array $db_table_fields = ['name', 'type', 'size', 'upload_dir'];
+	protected static string $db_table = 'files';
+	public ?int $id = null;
 	public ?string $name = null;
 	public ?string $type = null;
 	public ?int $size = null;
