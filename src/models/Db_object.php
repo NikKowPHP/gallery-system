@@ -23,7 +23,7 @@ class Db_object
 	{
 		self::$database = $database;
 	}
-	private static function instantiate($db_row): ?self
+	protected static function instantiate($db_row): ?self
 	{
 		$calling_class = get_called_class();
 		$obj = new $calling_class;
@@ -94,7 +94,6 @@ class Db_object
 
 
 		$sql = "INSERT INTO " . static::$db_table . " ($columns) VALUES ($values)";
-		var_dump($sql);
 		if (self::$database->query($sql)) {
 			$this->id = self::$database->insert_id();
 			return true;
