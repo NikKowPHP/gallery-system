@@ -28,10 +28,10 @@ class File extends Db_object
 	public array $custom_errors = [];
 
 
-	public function __construct(string $upload_dir, array $file)
+	public function __construct()
 	{
-		$this->upload_dir = $upload_dir;
-		$this->init($file);
+		// $this->upload_dir = $upload_dir;
+		// $this->init($file);
 	}
 
 	public function path(): string
