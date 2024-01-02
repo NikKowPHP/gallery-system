@@ -1,5 +1,5 @@
 <div class="col-md-4 col-md-offset-3">
-	<form id="login-id" action=<?=FORMS_PATH . DS."admin/includes/login.php" ?> method="post">
+	<form id="login-id" action=<?=FORMS_PATH . DS."src/controllers/loginController.php" ?> method="post">
 
 		<div class="form-group">
 			<label for="username">Username</label>

@@ -3,13 +3,13 @@ use Models\Session;
 use Models\User;
 use Models\Location;
 require_once(__DIR__."/../../autoload.php");
-require_once(__DIR__ . "/../../src/utils/functions.php");
+require_once(__DIR__ . "/../utils/functions.php");
 
 $session = new Session();
 
 
 if ($session->is_signed_in()) {
-	redirect("index.php");
+	Location::redirect("admin/index.php");
 }
 
 if (isset($_POST['submit'])) {
@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
 
 	if (!is_null($user_found)) {
 		$session->login($user_found);
-		redirect("admin/index.php");
+		Location::redirect("admin/index.php");
 	} else {
 		$user = new User();
 		$user->iterate_post($_POST);
