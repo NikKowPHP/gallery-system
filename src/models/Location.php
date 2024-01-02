@@ -12,6 +12,12 @@ class Location
 	{
 		self::$current_location = __DIR__;
 	}
+	/**
+	 * @param string $to - The path should start without '/' and starts from the root directory, e.g. 'src/views/photo.php'
+	 * 
+	 * 
+	 * @return void
+	 */
 	public static function redirect(string $to): void
 	{
 		$header_location = "Location: ";
