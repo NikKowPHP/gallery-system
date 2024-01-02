@@ -77,6 +77,10 @@ class File extends Db_object
 			return false;
 		}
 	}
+	public function setUploadDir(string $upload_dir_name): void
+	{
+		$this->upload_dir = $upload_dir_name;
+	}
 
 	public static function remove(string $upload_dir, string $filename): bool
 	{
