@@ -1,10 +1,6 @@
 <?php
+require_once("config/constants.php");
 
-defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
-defined('SITE_ROOT') ? null : define('SITE_ROOT', DS . 'code' . DS . 'gallery-system');
-defined('FORMS_PATH') ? null : define('FORMS_PATH', DS . 'gallery-system');
-defined('SRC') ? null : define('SRC', SITE_ROOT . DS . 'src');
-defined('PUBLIC_FOLDER') ? null : define('PUBLIC_FOLDER', SITE_ROOT . DS . 'public');
 
 spl_autoload_register(function ($class_name) {
 	$paths = [
