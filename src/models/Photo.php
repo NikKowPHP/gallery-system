@@ -15,9 +15,9 @@ class Photo extends Db_object
 	public ?File $file = null;
 	public ?string $upload_dir = "images";
 
-	public function __construct(File $file)
+	public function __construct()
 	{
-		$this->setFile($file);
+		// $this->setFile($file);
 	}
 	public function setDescription(string $description)
 	{
@@ -44,6 +44,31 @@ class Photo extends Db_object
 	{
 		$this->file->remove($this->upload_dir, $this->file->name);
 		return false;
+	}
+	public static function get_all(): array|bool
+	{
+		$sql = "SELECT p.*, f.* FROM " . static::$db_table . " p ";
+		$sql .= "LEFT JOIN files f ON p.file_id = f.id";
+
+		$result_set = static::get_data_by_query($sql);
+		if (!$result_set || empty($result_set)) {
+			return false;
+		}
+		return $result_set;
+	}
+	public static function get_data_by_query($sql): array|bool
+	{
+		self::check_database_instance();
+
+		$objects_arr = [];
+		$rows = self::$database->query($sql);
+		// $file = new File();
+		while ($row = $rows->fetch_assoc()) {
+			$photo = static::instantiate($row);
+			$photo->file = File::instantiate($row);
+			$objects_arr[] = $photo;
+		}
+		return $objects_arr;
 	}
 
 	// public function update(): bool
