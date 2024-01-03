@@ -2,6 +2,8 @@
 namespace Models;
 
 use Models\Db_object;
+use Models\Comment;
+use Models\QueryBuilder;
 
 class Photo extends Db_object
 {
@@ -12,7 +14,10 @@ class Photo extends Db_object
 	public ?string $alt = null;
 	public ?string $description = null;
 	public ?int $file_id = null;
+	public ?int $user_id = null;
 	public ?File $file = null;
+
+	public ?array $comments = [];
 	public ?string $upload_dir = "images";
 
 	public function __construct()
@@ -45,10 +50,17 @@ class Photo extends Db_object
 		$this->file->remove($this->upload_dir, $this->file->name);
 		return false;
 	}
+	public static function findAll(): QueryBuilder
+	{
+		$queryBuilder = new QueryBuilder();
+		return $queryBuilder->setTable(static::$db_table);
+
+	}
 	public static function get_all(): array|bool
 	{
-		$sql = "SELECT p.*, f.* FROM " . static::$db_table . " p ";
-		$sql .= "LEFT JOIN files f ON p.file_id = f.id";
+		$sql = "SELECT p.*, f.*, c.* FROM " . static::$db_table . " p ";
+		$sql .= "LEFT JOIN files f ON p.file_id = f.id ";
+		$sql .= "LEFT JOIN comments c ON c.photo_id = p.id";
 
 		$result_set = static::get_data_by_query($sql);
 		if (!$result_set || empty($result_set)) {
@@ -62,10 +74,16 @@ class Photo extends Db_object
 
 		$objects_arr = [];
 		$rows = self::$database->query($sql);
-		// $file = new File();
+		
+
 		while ($row = $rows->fetch_assoc()) {
-			$photo = static::instantiate($row);
+			print_r($row);
+			echo "<br/>";
+			$photo = self::instantiate($row);
 			$photo->file = File::instantiate($row);
+			$photo->file->id = $row['file_id'];
+			$photo->comments[] = Comment::instantiate($row);
+
 			$objects_arr[] = $photo;
 		}
 		return $objects_arr;
