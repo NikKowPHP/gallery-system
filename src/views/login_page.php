@@ -1,6 +1,6 @@
 <?php require_once(__DIR__ . "/../../autoload.php"); ?>
 
-<?php require_once(SITE_ROOT . DS . "admin/includes/login.php") ?>
+<?php require_once(SITE_ROOT . DS . "src/controllers/loginController.php") ?>
 <?php
 use Templates\HomeTemplate;
 
