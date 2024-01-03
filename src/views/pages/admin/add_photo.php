@@ -1,5 +1,12 @@
+<?php 
+use Models\Session;
+$session = new Session();
+?>
 
-<form action="<?=FORMS_PATH . DS . '/src/controllers/photo_form_handler.php'?>" method="post" enctype="multipart/form-data">
+<?php $session->get_message() ?? "<h1>$sesion->get_message()</h1>" ?>
+
+<form action="<?= FORMS_PATH . DS . 'src/controllers/addPhotoController.php' ?>" method="post"
+    enctype="multipart/form-data" class="d-flex p-2 m-auto flex-column justify-content-center container">
     <label for="title">Title:</label>
     <input type="text" id="title" name="title">
 
