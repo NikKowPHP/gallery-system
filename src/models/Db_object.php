@@ -25,8 +25,7 @@ class Db_object
 	}
 	protected static function instantiate($db_row): ?self
 	{
-		$calling_class = get_called_class();
-		$obj = new $calling_class;
+		$obj = new static;
 		foreach ($db_row as $key => $value) {
 			if (property_exists($obj, $key)) {
 				$obj->$key = $value;
